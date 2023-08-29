@@ -29,8 +29,6 @@ import com.blacksquircle.ui.core.extensions.applySystemWindowInsets
 import com.blacksquircle.ui.core.extensions.decorFitsSystemWindows
 import com.blacksquircle.ui.core.extensions.fullscreenMode
 import com.blacksquircle.ui.core.storage.keyvalue.SettingsManager
-import com.blacksquircle.ui.feature.editor.ui.viewmodel.EditorViewModel
-import com.blacksquircle.ui.feature.editor.ui.mvi.EditorIntent
 import com.blacksquircle.ui.databinding.ActivityMainBinding
 import com.blacksquircle.ui.utils.InAppUpdate
 import com.google.android.material.snackbar.Snackbar
@@ -85,9 +83,5 @@ class MainActivity : AppCompatActivity() {
         }
         val settingsManager = SettingsManager(this)
         settingsManager.colorScheme = colorScheme
-
-        val intent = EditorIntent.LoadSettings
-        val editorViewModel by viewModels<EditorViewModel>()
-        editorViewModel.obtainEvent(intent)
     }
 }
