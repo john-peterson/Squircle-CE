@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             mainViewModel.handleIntent(intent)
         }
+
+        setColorScheme()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -72,10 +74,8 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.handleIntent(intent)
     }
 
-    override fun onConfigurationChanged(config: Configuration) {
-        super.onConfigurationChanged(config)
-        recreate()
-
+    fun setColorScheme() {
+        val config = getResources().getConfiguration()
         val colorScheme: String
         when (config.isNightModeActive()) {
             true -> colorScheme = "VISUAL_STUDIO_2013"
@@ -83,5 +83,11 @@ class MainActivity : AppCompatActivity() {
         }
         val settingsManager = SettingsManager(this)
         settingsManager.colorScheme = colorScheme
+    }
+
+    override fun onConfigurationChanged(config: Configuration) {
+        super.onConfigurationChanged(config)
+        recreate()
+        setColorScheme()
     }
 }
