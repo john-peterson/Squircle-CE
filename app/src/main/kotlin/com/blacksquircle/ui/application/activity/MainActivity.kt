@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         val config = getResources().getConfiguration()
         val colorScheme: String
         when (config.isNightModeActive()) {
-            true -> colorScheme = "VISUAL_STUDIO_2013"
-            false -> colorScheme = "INTELLIJ_LIGHT"
+            true -> colorScheme = "dark"
+            false -> colorScheme = "day"
         }
         val settingsManager = SettingsManager(this)
         settingsManager.colorScheme = colorScheme
