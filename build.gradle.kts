@@ -14,21 +14,117 @@
  * limitations under the License.
  */
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.ksp) apply false
+    alias(libs.plugins.kotlin.kover)
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.navigation) apply false
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
+    pluginManager.withPlugin("com.android.library") {
+        koverMerge("debug")
     }
-    dependencies {
-        classpath(libs.plugin.android)
-        classpath(libs.plugin.kotlin)
-        classpath(libs.plugin.hilt)
-        classpath(libs.plugin.safeargs)
+    pluginManager.withPlugin("com.android.application") {
+        koverMerge("fdroidDebug")
+    }
+    rootProject.dependencies.add("kover", this)
+}
+
+fun Project.koverMerge(buildVariant: String) {
+    koverReport {
+        defaults {
+            mergeWith(buildVariant)
+        }
     }
 }
 
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
+// ./gradlew :koverHtmlReport
+koverReport {
+    filters {
+        excludes {
+            classes(
+                // Android classes
+                "*Application*",
+                "*Activity*",
+                "*Fragment*",
+                "*Dialog*",
+                "*Worker*",
+                // Android generated
+                "*.databinding.*",
+                "*.BuildConfig",
+                // Hilt generated
+                "hilt_aggregated_deps.*",
+                "*_Factory*",
+                "*_Provide*Factory*",
+                "*_HiltModules*",
+                "*_MembersInjector*",
+                // NavComponent generated
+                "*FragmentArgs",
+                "*FragmentArgs\$*",
+                "*FragmentDirections",
+                "*FragmentDirections\$*",
+                // Room generated
+                "*Dao_Impl",
+                "*Dao_Impl\$*",
+                // Code style
+                "*App*",
+                "*Extensions*",
+                "*.internal.*",
+                "*.model.*",
+                "*.entity.*",
+                "*.adapter.*",
+                "*.customview.*",
+                "*.view.*",
+                "*.widget.*",
+                "*.dialog.*",
+                "*.fragment.*",
+                "*.navigation.*",
+                "*.lexer.*",
+                "*.editorkit.*",
+            )
+        }
+    }
 }
 
-apply(from = "gradle/ktlint.gradle.kts")
+val ktlint: Configuration by configurations.creating
+
+dependencies {
+    ktlint(libs.ktlint) {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
+}
+
+tasks.register<JavaExec>("ktlintCheck") {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Check Kotlin code style."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args(
+        "**/src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}
+
+tasks.register<JavaExec>("ktlintFormat") {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Fix Kotlin code style deviations."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
+    args(
+        "-F",
+        "**/src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}

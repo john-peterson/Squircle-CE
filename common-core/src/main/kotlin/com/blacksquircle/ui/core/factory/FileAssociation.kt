@@ -25,6 +25,7 @@ import com.blacksquircle.ui.language.fortran.FortranLanguage
 import com.blacksquircle.ui.language.go.GoLanguage
 import com.blacksquircle.ui.language.groovy.GroovyLanguage
 import com.blacksquircle.ui.language.html.HtmlLanguage
+import com.blacksquircle.ui.language.ini.IniLanguage
 import com.blacksquircle.ui.language.java.JavaLanguage
 import com.blacksquircle.ui.language.javascript.JavaScriptLanguage
 import com.blacksquircle.ui.language.json.JsonLanguage
@@ -77,8 +78,10 @@ object FileAssociation {
         associations[".gradle"] = GroovyLanguage.LANGUAGE_NAME
         associations[".htm"] = HtmlLanguage.LANGUAGE_NAME
         associations[".html"] = HtmlLanguage.LANGUAGE_NAME
+        associations[".ini"] = IniLanguage.LANGUAGE_NAME
         associations[".java"] = JavaLanguage.LANGUAGE_NAME
         associations[".js"] = JavaScriptLanguage.LANGUAGE_NAME
+        associations[".jsx"] = JavaScriptLanguage.LANGUAGE_NAME
         associations[".mjs"] = JavaScriptLanguage.LANGUAGE_NAME
         associations[".cjs"] = JavaScriptLanguage.LANGUAGE_NAME
         associations[".json"] = JsonLanguage.LANGUAGE_NAME
@@ -119,6 +122,7 @@ object FileAssociation {
         associations[".sqlite3"] = SqlLanguage.LANGUAGE_NAME
         associations[".toml"] = TomlLanguage.LANGUAGE_NAME
         associations[".ts"] = TypeScriptLanguage.LANGUAGE_NAME
+        associations[".tsx"] = TypeScriptLanguage.LANGUAGE_NAME
         associations[".mts"] = TypeScriptLanguage.LANGUAGE_NAME
         associations[".cts"] = TypeScriptLanguage.LANGUAGE_NAME
         associations[".vb"] = VisualBasicLanguage.LANGUAGE_NAME

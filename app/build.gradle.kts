@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id("application-module")
+    id("com.blacksquircle.application")
 }
 
 android {
@@ -23,8 +23,8 @@ android {
 
     defaultConfig {
         applicationId = "com.blacksquircle.ui"
-        versionCode = 10021
-        versionName = "2023.1.5"
+        versionCode = 10022
+        versionName = "2023.2.0"
     }
     buildFeatures {
         viewBinding = true
@@ -61,27 +61,27 @@ dependencies {
 
     // DI
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.workmanager)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Modules
-    implementation(project(":feature-changelog-api"))
-    implementation(project(":feature-changelog-impl"))
-    implementation(project(":feature-editor-api"))
-    implementation(project(":feature-editor-impl"))
-    implementation(project(":feature-explorer-api"))
-    implementation(project(":feature-explorer-impl"))
-    implementation(project(":feature-fonts-api"))
-    implementation(project(":feature-fonts-impl"))
-    implementation(project(":feature-servers-api"))
-    implementation(project(":feature-servers-impl"))
-    implementation(project(":feature-settings-api"))
-    implementation(project(":feature-settings-impl"))
-    implementation(project(":feature-shortcuts-api"))
-    implementation(project(":feature-shortcuts-impl"))
-    implementation(project(":feature-themes-api"))
-    implementation(project(":feature-themes-impl"))
+    implementation(project(":feature-changelog:api"))
+    implementation(project(":feature-changelog:impl"))
+    implementation(project(":feature-editor:api"))
+    implementation(project(":feature-editor:impl"))
+    implementation(project(":feature-explorer:api"))
+    implementation(project(":feature-explorer:impl"))
+    implementation(project(":feature-fonts:api"))
+    implementation(project(":feature-fonts:impl"))
+    implementation(project(":feature-servers:api"))
+    implementation(project(":feature-servers:impl"))
+    implementation(project(":feature-settings:api"))
+    implementation(project(":feature-settings:impl"))
+    implementation(project(":feature-shortcuts:api"))
+    implementation(project(":feature-shortcuts:impl"))
+    implementation(project(":feature-themes:api"))
+    implementation(project(":feature-themes:impl"))
     implementation(project(":common-core"))
     implementation(project(":common-ui"))
 

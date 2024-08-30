@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-import com.blacksquircle.gradle.Gradle
+import com.blacksquircle.ui.BuildConst
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    id("stub-module")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.hilt)
+    id("com.blacksquircle.stub")
 }
 
 android {
-    compileSdk = Gradle.Build.compileSdk
+    compileSdk = BuildConst.COMPILE_SDK
     namespace = "com.blacksquircle.ui.core"
 
     defaultConfig {
-        minSdk = Gradle.Build.minSdk
+        minSdk = BuildConst.MIN_SDK
 
         consumerProguardFiles("consumer-rules.pro")
 
@@ -75,14 +75,14 @@ dependencies {
     // AAC
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.room)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     // Network
     implementation(libs.gson)
 
     // DI
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Modules
     implementation(project(":filesystems:filesystem-base"))
@@ -97,6 +97,7 @@ dependencies {
     implementation(project(":editorkit:language-go"))
     implementation(project(":editorkit:language-groovy"))
     implementation(project(":editorkit:language-html"))
+    implementation(project(":editorkit:language-ini"))
     implementation(project(":editorkit:language-java"))
     implementation(project(":editorkit:language-javascript"))
     implementation(project(":editorkit:language-json"))

@@ -19,6 +19,7 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -36,22 +37,22 @@ include(":app", ":benchmark")
 include(
     ":common-core",
     ":common-ui",
-    ":feature-changelog-api",
-    ":feature-changelog-impl",
-    ":feature-editor-api",
-    ":feature-editor-impl",
-    ":feature-explorer-api",
-    ":feature-explorer-impl",
-    ":feature-fonts-api",
-    ":feature-fonts-impl",
-    ":feature-servers-api",
-    ":feature-servers-impl",
-    ":feature-settings-api",
-    ":feature-settings-impl",
-    ":feature-shortcuts-api",
-    ":feature-shortcuts-impl",
-    ":feature-themes-api",
-    ":feature-themes-impl",
+    ":feature-changelog:api",
+    ":feature-changelog:impl",
+    ":feature-editor:api",
+    ":feature-editor:impl",
+    ":feature-explorer:api",
+    ":feature-explorer:impl",
+    ":feature-fonts:api",
+    ":feature-fonts:impl",
+    ":feature-servers:api",
+    ":feature-servers:impl",
+    ":feature-settings:api",
+    ":feature-settings:impl",
+    ":feature-shortcuts:api",
+    ":feature-shortcuts:impl",
+    ":feature-themes:api",
+    ":feature-themes:impl",
 )
 
 include(
@@ -78,6 +79,7 @@ include(
     ":editorkit:language-go",
     ":editorkit:language-groovy",
     ":editorkit:language-html",
+    ":editorkit:language-ini",
     ":editorkit:language-java",
     ":editorkit:language-javascript",
     ":editorkit:language-json",
