@@ -237,6 +237,14 @@ class ThemesRepositoryImpl(
         }
     }
 
+    override suspend fun selectTheme(name: String) {
+        withContext(dispatcherProvider.io()) {
+            val theme = loadThemes(name)
+            if (theme.size()>0)
+                settingsManager.colorScheme = theme[0].colorScheme
+            }
+    }
+
     companion object {
         private const val FALLBACK_COLOR = "#000000"
     }

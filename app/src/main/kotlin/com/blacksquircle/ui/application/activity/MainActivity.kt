@@ -30,6 +30,7 @@ import com.blacksquircle.ui.core.extensions.decorFitsSystemWindows
 import com.blacksquircle.ui.core.extensions.fullscreenMode
 import com.blacksquircle.ui.core.storage.keyvalue.SettingsManager
 import com.blacksquircle.ui.databinding.ActivityMainBinding
+import com.blacksquircle.ui.feature.themes.domain.repository.ThemesRepository
 import com.blacksquircle.ui.utils.InAppUpdate
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,13 +77,15 @@ class MainActivity : AppCompatActivity() {
 
     fun setColorScheme() {
         val config = getResources().getConfiguration()
-        val colorScheme: String
+        val name: String
         when (config.isNightModeActive()) {
-            true -> colorScheme = "dark"
-            false -> colorScheme = "day"
+            true -> name = "dark"
+            false -> name ="day"
         }
-        val settingsManager = SettingsManager(this)
-        settingsManager.colorScheme = colorScheme
+        val themesRepository = ThemesRepository(this)
+        themesRepository.selectTheme(name)
+        //val settingsManager = SettingsManager(this)
+        //settingsManager.colorScheme = colorScheme
     }
 
     override fun onConfigurationChanged(config: Configuration) {
