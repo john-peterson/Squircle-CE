@@ -166,7 +166,7 @@ class ThemesViewModel @Inject constructor(
                     ViewEvent.Toast(
                         stringProvider.getString(
                             R.string.message_selected,
-                            event.themeModel.name,
+                            event.themeModel.uuid,
                         ),
                     ),
                 )

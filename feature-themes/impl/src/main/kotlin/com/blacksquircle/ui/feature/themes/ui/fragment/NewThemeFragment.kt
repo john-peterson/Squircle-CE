@@ -106,7 +106,7 @@ class NewThemeFragment : Fragment(R.layout.fragment_new_theme) {
 
         binding.actionSave.setOnClickListener {
             val meta = Meta(
-                uuid = navArgs.uuid ?: UUID.randomUUID().toString(),
+                uuid = binding.textInputThemeName.text.toString(),
                 name = binding.textInputThemeName.text.toString(),
                 author = binding.textInputThemeAuthor.text.toString(),
                 description = binding.textInputThemeDescription.text.toString(),
